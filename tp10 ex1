@@ -1,0 +1,95 @@
+// Classe principale 
+public class Main {
+    public static void main(String[] args) {
+      
+        CollectionArt collectionArt = new CollectionArt();
+
+        // Création d'OeuvreArt avec leurs informations
+        OeuvreArt art1 = new OeuvreArt("Mona Lisa", "Léonard de Vinci", "1503", "Renaissance");
+        OeuvreArt art2 = new OeuvreArt("École d'Athènes", "Raphaël", "1508", "Peinture d'histoire");
+        OeuvreArt art3 = new OeuvreArt("La création d'Adam", "Michel-Ange", "1512", "Art chrétien");
+
+        // Appel de la méthode ajouterCollection pour ajouter les oeuvres
+        collectionArt.ajouterCollection(art1);
+        collectionArt.ajouterCollection(art2);
+        collectionArt.ajouterCollection(art3);
+
+        // Recherche d'une oeuvre par nom d'artiste
+        collectionArt.chercherOeuvre("Raphaël");
+
+        // Suppression d'une oeuvre de la collection
+        collectionArt.supprimerOeuvre(art1);
+
+        // Affichage de toutes les oeuvres dans la collection
+        collectionArt.affichageCollection();
+    }
+}
+// Classe représentant une oeuvre d'art
+public class OeuvreArt {
+    // Attributs de l'oeuvre d'art
+    String titre;     
+    String artiste;    
+    String date;       
+    String type;       
+
+    // Constructeur pour initialiser les attributs de l'oeuvre d'art
+    OeuvreArt(String titre, String artiste, String date, String type) {
+        this.titre = titre;
+        this.artiste = artiste;
+        this.date = date;
+        this.type = type;
+    }
+
+    // Redéfinition de la méthode toString() pour afficher les informations de l'oeuvre sous forme de texte
+    @Override
+    public String toString() {
+        // Renvoie une chaîne de caractères contenant les détails de l'œuvre
+        return titre + " " + artiste + " " + date + " " + type;
+    }
+}
+import java.util.ArrayList; // Importation de la classe ArrayList pour gérer une liste dynamique
+import java.util.Collection; // Importation de la classe Collection (non utilisée ici mais souvent importée pour les collections)
+
+// Classe représentant une collection d'oeuvres d'art
+public class CollectionArt {
+    // Liste pour stocker les objets OeuvreArt
+    ArrayList<OeuvreArt> collections;
+
+    // Initialise la liste d'oeuvres d'art
+    CollectionArt() {
+        collections = new ArrayList<>(); 
+    }
+
+    // Méthode pour ajouter une oeuvre à la collection
+    public void ajouterCollection(OeuvreArt art) {
+        collections.add(art); 
+    }
+
+    // Méthode pour supprimer une oeuvre de la collection
+    public void supprimerOeuvre(OeuvreArt art) {
+        for (int i = 0; i < collections.size(); i++) {
+            if (collections.get(i).equals(art)) {
+                collections.remove(i);
+            }
+        }
+    }
+
+    // Méthode pour chercher une oeuvre par le nom de l'artiste
+     public void ChercherOeuvre(String artiste) {
+        OeuvreArt art = collections.get(0);
+        for (int i = 0; i < collections.size(); i++) {
+            if(collections.get(i).artiste.equals(art.artiste)) {
+                System.out.println("Oeuvre de l'artiste " + art.artiste+" est touveé");
+                break;
+            }
+        }
+    }
+
+    // Méthode pour afficher toutes les oeuvres dans la collection
+    public void affichageCollection() {
+        for (OeuvreArt art : collections) {
+            System.out.println(art); 
+        }
+    }
+}
+
